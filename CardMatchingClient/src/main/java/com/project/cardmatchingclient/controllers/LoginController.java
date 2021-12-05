@@ -3,6 +3,7 @@ package com.project.cardmatchingclient.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -23,9 +24,18 @@ public class LoginController {
     private Button registerButton;
 
     @FXML
-    protected void onLoginButtonClicked(ActionEvent event) throws IOException {
+    private Label wrongLogin;
 
-        SceneController.changeScene(event,"fxml/menu-view.fxml");
+    @FXML
+    protected void onLoginButtonClicked(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
+        if(usernameInput.getText().toString().equals("tai") && passwordInput.getText().toString().equals("123")) {
+            sceneController.changeScene(event, "fxml/menu-view.fxml");
+        } else if(usernameInput.getText().isEmpty() && passwordInput.getText().isEmpty()) {
+            wrongLogin.setText("Please enter your data.");
+        } else {
+            wrongLogin.setText("Wrong username or password!");
+        }
     }
 
     @FXML

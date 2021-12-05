@@ -11,8 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CardMatchingClient" target="17" />
-      <module name="CardMatchingServer" target="17" />
+      <module name="CardMatchingClient" target="16" />
+      <module name="CardMatchingServer" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
