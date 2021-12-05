@@ -8,9 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 
 public class LoginController {
@@ -58,6 +56,29 @@ public class LoginController {
 
     @FXML
     protected void onRegisterButtonClicked(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
+        if (checkExistedAcc(usernameInput.getText())) {
+            wrongLogin.setText("Account already exists");
+        } else {
+            String path = "C:\\Users\\Tai\\Desktop\\CardMatchingGame\\CardMatchingClient\\src\\main\\java\\com\\project\\cardmatchingclient\\db\\account.txt";
+            BufferedWriter out = new BufferedWriter(new FileWriter(path,true));
+            out.write(usernameInput.getText() + " " + BCrypt.hashpw(passwordInput.getText(), BCrypt.gensalt(12)));
+            out.newLine();
+            out.close();
+            sceneController.changeScene(event, "fxml/menu-view.fxml");
+        }
+    }
+    public boolean checkExistedAcc(String userName) throws IOException {
+        FileReader fr = new FileReader("C:\\Users\\Tai\\Desktop\\CardMatchingGame\\CardMatchingClient\\src\\main\\java\\com\\project\\cardmatchingclient\\db\\account.txt");
+        BufferedReader br = new BufferedReader(fr);
+        String line,user;
 
+        while ((line = br.readLine()) != null) {
+            user = line.split(" ")[0];
+            if (user.equals(userName.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
