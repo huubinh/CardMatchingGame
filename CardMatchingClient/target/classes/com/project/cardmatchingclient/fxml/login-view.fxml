@@ -68,6 +68,11 @@
                   <Font size="17.0" />
                </font>
             </Label>
+            <Label fx:id="wrongLogin" layoutX="268.0" layoutY="119.0" textFill="#e71010">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>

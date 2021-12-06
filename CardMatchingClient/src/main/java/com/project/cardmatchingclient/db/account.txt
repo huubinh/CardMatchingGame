@@ -1,0 +1,3 @@
+binh $2a$12$ROHN246hS.or7nWnqXtsAef21Zo7atvi.o8QncwcgCxag1WFqlGHW
+tai $2a$12$st73gsdZCeikOkW8OpEYWuzoa4/Q5.gWXTRB3DLMMfT9Me0YKltJO
+test $2a$12$RInxlre5Y7ge7chNo5WsFeLidNz2vaY3Mz76yY0iIfDj50XRaKOOW
