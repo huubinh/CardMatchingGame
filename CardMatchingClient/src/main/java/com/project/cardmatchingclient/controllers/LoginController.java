@@ -29,9 +29,23 @@ public class LoginController {
     private Label wrongLogin;
 
     @FXML
+    private PasswordField oldPasswordInput;
+
+    @FXML
+    private PasswordField newPasswordInput;
+
+    @FXML
+    public PasswordField renewPasswordInput;
+
+    @FXML
+    private Label wrongChangePass;
+
+    @FXML
     protected void onLoginButtonClicked(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();
-        if(checkLogin(usernameInput.getText(),passwordInput.getText())) {
+        if (usernameInput.getText().isEmpty() || passwordInput.getText().isEmpty()) {
+            wrongLogin.setText("Must enter full username and password");
+        } else if(checkLogin(usernameInput.getText(),passwordInput.getText())) {
             sceneController.changeScene(event, "fxml/menu-view.fxml");
         } else if(usernameInput.getText().isEmpty() && passwordInput.getText().isEmpty()) {
             wrongLogin.setText("Please enter your data.");
@@ -57,7 +71,10 @@ public class LoginController {
     @FXML
     protected void onRegisterButtonClicked(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();
-        if (checkExistedAcc(usernameInput.getText())) {
+        if (usernameInput.getText().isEmpty() || passwordInput.getText().isEmpty()) {
+            wrongLogin.setText("Must enter full username and password");
+        }
+        else if (checkExistedAcc(usernameInput.getText())) {
             wrongLogin.setText("Account already exists");
         } else {
             String path = "C:\\Users\\Tai\\Desktop\\CardMatchingGame\\CardMatchingClient\\src\\main\\java\\com\\project\\cardmatchingclient\\db\\account.txt";
@@ -80,5 +97,15 @@ public class LoginController {
             }
         }
         return false;
+    }
+
+    public void onChangePassButtonClicked(ActionEvent event) {
+        if(oldPasswordInput.getText().isEmpty() || newPasswordInput.getText().isEmpty() || renewPasswordInput.getText().isEmpty()){
+            wrongChangePass.setText("Must enter full password");
+        }
+    }
+
+    public void onCancelButtonClicked(ActionEvent event) throws IOException {
+        SceneController.changeScene(event, "fxml/menu-view.fxml");
     }
 }
