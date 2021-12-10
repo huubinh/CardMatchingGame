@@ -16,4 +16,9 @@ public class MenuController {
 
         SceneController.changeScene(event,"fxml/login-view.fxml");
     }
+
+    public void onChangePassWordButtonClicked(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.changeScene(event,"fxml/change-password-view.fxml");
+    }
 }
