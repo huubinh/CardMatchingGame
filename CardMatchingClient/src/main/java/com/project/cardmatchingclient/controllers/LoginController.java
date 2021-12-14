@@ -109,12 +109,11 @@ public class LoginController {
         } else if(!checkLogin("1","1")) {
             wrongChangePass.setText("Old password is incorrect");
         } else {
-            String line,l;
+            String line;
             String path = "C:\\Users\\Tai\\Desktop\\CardMatchingGame\\CardMatchingClient\\src\\main\\java\\com\\project\\cardmatchingclient\\db\\account.txt";
             File fileToBeModified = new File(path);
             String newFilePass = "";
             BufferedReader reader = null;
-//            FileWriter writer = new FileWriter(fileToBeModified,false);
 
             reader = new BufferedReader(new FileReader(fileToBeModified));
             while ((line = reader.readLine()) != null) {
@@ -125,11 +124,9 @@ public class LoginController {
             }
             fileToBeModified.delete();
             PrintWriter writer = new PrintWriter(path, "UTF-8");
-            writer.println(newFilePass);
+            writer.print(newFilePass);
             writer.close();
 
-//            writer.write(newFilePass);
-//            writer.close();
             sceneController.changeScene(event, "fxml/menu-view.fxml");
         }
     }
