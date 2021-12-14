@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.io.*;
+import java.util.Scanner;
 
 
 public class LoginController {
@@ -99,9 +100,37 @@ public class LoginController {
         return false;
     }
 
-    public void onChangePassButtonClicked(ActionEvent event) {
+    public void onChangePassButtonClicked(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
         if(oldPasswordInput.getText().isEmpty() || newPasswordInput.getText().isEmpty() || renewPasswordInput.getText().isEmpty()){
-            wrongChangePass.setText("Must enter full password");
+            wrongChangePass.setText("Please enter a valid password and try again");
+        } else if(!newPasswordInput.getText().equals(renewPasswordInput.getText())) {
+            wrongChangePass.setText("New password does not match");
+        } else if(!checkLogin("1","1")) {
+            wrongChangePass.setText("Old password is incorrect");
+        } else {
+            String line,l;
+            String path = "C:\\Users\\Tai\\Desktop\\CardMatchingGame\\CardMatchingClient\\src\\main\\java\\com\\project\\cardmatchingclient\\db\\account.txt";
+            File fileToBeModified = new File(path);
+            String newFilePass = "";
+            BufferedReader reader = null;
+//            FileWriter writer = new FileWriter(fileToBeModified,false);
+
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            while ((line = reader.readLine()) != null) {
+                if (line.split(" ")[0].equals("1")) {
+                    line = line.replace(line.split(" ")[1], BCrypt.hashpw(newPasswordInput.getText(), BCrypt.gensalt(12)));
+                }
+                newFilePass = newFilePass + line + System.lineSeparator();
+            }
+            fileToBeModified.delete();
+            PrintWriter writer = new PrintWriter(path, "UTF-8");
+            writer.println(newFilePass);
+            writer.close();
+
+//            writer.write(newFilePass);
+//            writer.close();
+            sceneController.changeScene(event, "fxml/menu-view.fxml");
         }
     }
 
