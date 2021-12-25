@@ -14,11 +14,16 @@ public class MenuController {
     @FXML
     protected void onLogoutButtonClicked(ActionEvent event) throws IOException {
 
-        SceneController.changeScene(event,"fxml/login-view.fxml");
+        SceneController.changeScene(event, "fxml/login-view.fxml");
     }
 
     public void onChangePassWordButtonClicked(ActionEvent event) throws IOException {
         SceneController sceneController = new SceneController();
-        sceneController.changeScene(event,"fxml/change-password-view.fxml");
+        sceneController.changeScene(event, "fxml/change-password-view.fxml");
+    }
+
+    public void onHistoryButtonClicked(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
+        sceneController.changeScene(event, "fxml/history-view.fxml");
     }
 }
