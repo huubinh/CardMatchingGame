@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="255.0" prefWidth="534.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="255.0" prefWidth="534.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.HistoryController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="389.0" prefWidth="534.0" VBox.vgrow="ALWAYS">
          <children>
@@ -17,12 +17,12 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button layoutX="20.0" layoutY="29.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="58.0" style="-fx-background-color: #2196f3;" text="Back" textFill="WHITE" />
+            <Button layoutX="20.0" layoutY="29.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="35.0" prefWidth="58.0" style="-fx-background-color: #2196f3;" text="Back" textFill="WHITE" />
          </children>
       </AnchorPane>
       <VBox prefHeight="436.0" prefWidth="524.0">
          <children>
-            <ListView prefHeight="108.0" prefWidth="389.0" />
+            <ListView fx:id="moveList" prefHeight="108.0" prefWidth="389.0" />
          </children>
          <VBox.margin>
             <Insets left="20.0" right="20.0" />

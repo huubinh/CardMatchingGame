@@ -65,7 +65,7 @@
                   <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="271.0" style="-fx-background-color: #2196f3;" text="Random match" textFill="WHITE" />
                   <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: #2196f3;" text="Create room" textFill="WHITE" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="284.0" style="-fx-background-color: #2196f3;" text="Join room" textFill="WHITE" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="265.0" style="-fx-background-color: #2196f3;" text="History" textFill="WHITE" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#onHistoryButtonClicked" prefHeight="37.0" prefWidth="265.0" style="-fx-background-color: #2196f3;" text="History" textFill="WHITE" GridPane.rowIndex="3" />
                   <Button mnemonicParsing="false" onAction="#onChangePassWordButtonClicked" prefHeight="38.0" prefWidth="254.0" style="-fx-background-color: #2196f3;" text="Change password" textFill="WHITE" GridPane.rowIndex="4" />
                </children>
             </GridPane>
