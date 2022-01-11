@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="137.0" prefWidth="340.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.QuitBattleController">
+   <center>
+      <AnchorPane prefHeight="117.0" prefWidth="320.0" styleClass="background-pane" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="68.0" layoutY="41.0" text="Opponent quit the match" />
+            <Button layoutX="140.0" layoutY="73.0" mnemonicParsing="false" onAction="#onOkButtonClicked" styleClass="my-button" text="OK" />
+            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#onExitButtonClicked">
+               <styleClass>
+                  <String fx:value="my-button" />
+                  <String fx:value="exit-button" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

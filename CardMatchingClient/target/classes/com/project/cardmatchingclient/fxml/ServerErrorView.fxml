@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="469.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.ServerErrorController">
+   <center>
+      <AnchorPane prefHeight="187.0" prefWidth="457.0" styleClass="background-pane" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="exitButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExitButtonClicked">
+               <styleClass>
+                  <String fx:value="exit-button" />
+                  <String fx:value="my-button" />
+               </styleClass></Button>
+            <ImageView fitHeight="123.0" fitWidth="125.0" layoutX="35.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/rocket.png.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="255.0" layoutY="44.0" styleClass="text" text="OOPS!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="186.0" layoutY="90.0" styleClass="text" text="Can not connect to server!">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="206.0" layoutY="136.0" styleClass="text" text="Please try again later">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
