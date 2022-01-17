@@ -52,10 +52,17 @@ public class FullRoomHandler implements Runnable {
                             break loop;
                         case "START":
                             String battle = Server.activeUsers.get(hostSocket) + "-" + Server.activeUsers.get(guestSocket);
-                            BattleHandler gameHandler = new BattleHandler(hostSocket, guestSocket, battle);
+                            sendToHost("START`CONFIRM");
+                            sendToGuest("START`" + battle);
+                            BattleHandler gameHandler = new BattleHandler(hostSocket, guestSocket, battle, false);
                             Thread thread = new Thread(gameHandler);
                             thread.start();
                             while (Server.battles.contains(battle));
+                            break;
+                        case "ENTER":
+                            String roomName = Server.roomHosts.get(hostSocket);
+                            sendToHost("ENTER`" + roomName);
+                            sendToHost("RETURN`" + Server.activeUsers.get(guestSocket));
                             break;
                     }
                 }
@@ -73,6 +80,14 @@ public class FullRoomHandler implements Runnable {
                 }
                 else if (receivedList[0].equals("QUIT"))
                     break loop;
+                else if (receivedList[0].equals("ENTER")) {
+                    while (Server.battles.contains(receivedList[1]));
+                }
+                else if (receivedList[0].equals("ROOM") && receivedList[1].equals("ENTER")) {
+                    String roomName = Server.findRoom(guestSocket);
+                    sendToGuest("RETURN`" + roomName + "`" + Server.findHost(roomName));
+                }
+
             }
 
         });

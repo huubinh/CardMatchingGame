@@ -30,12 +30,13 @@ public class BattleHandler implements Runnable{
     private int playerBScore = 0;
     private Random random = new Random();
 
-    public BattleHandler(Socket playerASocket, Socket playerBSocket, String newMatch) {
+    public BattleHandler(Socket playerASocket, Socket playerBSocket, String newMatch, boolean isRandom) {
 
         Server.battles.add(newMatch);
         matchName = newMatch;
         this.playerASocket = playerASocket;
         this.playerBSocket = playerBSocket;
+        this.isRandom = isRandom;
 
         try {
             playerAIs = new DataInputStream(new BufferedInputStream(playerASocket.getInputStream()));
@@ -53,9 +54,10 @@ public class BattleHandler implements Runnable{
 
     @Override
     public void run() {
-
-        sendToPlayerA("RAND`OK`" + matchName);
-        sendToPlayerB("RAND`OK`" + matchName);
+        if (isRandom) {
+            sendToPlayerA("RAND`OK`" + matchName);
+            sendToPlayerB("RAND`OK`" + matchName);
+        }
 //        try {
 //            Thread.sleep(1000);
 //        } catch (InterruptedException e) {
@@ -82,8 +84,13 @@ public class BattleHandler implements Runnable{
 
             turn = random.nextInt(2) + 1;
 
-            sendToPlayerA("START`" + Server.activeUsers.get(playerASocket) + "`" + Server.activeUsers.get(playerBSocket) + "`" + turn);
-            sendToPlayerB("START`" + Server.activeUsers.get(playerBSocket) + "`" + Server.activeUsers.get(playerASocket) + "`" + (turn == 1 ? 2 : 1));
+            if (isRandom) {
+                sendToPlayerA("START`" + Server.activeUsers.get(playerASocket) + "`" + Server.activeUsers.get(playerBSocket) + "`" + turn + "`RAND");
+                sendToPlayerB("START`" + Server.activeUsers.get(playerBSocket) + "`" + Server.activeUsers.get(playerASocket) + "`" + (turn == 1 ? 2 : 1) + "`RAND");
+            } else {
+                sendToPlayerA("START`" + Server.activeUsers.get(playerASocket) + "`" + Server.activeUsers.get(playerBSocket) + "`" + turn + "`HOST");
+                sendToPlayerB("START`" + Server.activeUsers.get(playerBSocket) + "`" + Server.activeUsers.get(playerASocket) + "`" + (turn == 1 ? 2 : 1) + "`GUEST");
+            }
 
 
         Thread playerAThread = new Thread(() -> {
@@ -150,13 +157,24 @@ public class BattleHandler implements Runnable{
             switch (receivedList[0]) {
                 case "QUIT":
                     if (receivedList[1].equals("BATTLE")) {
-                        if (player == 'A') {
-                            sendToPlayerA("QUIT`CONFIRM");
-                            sendToPlayerB("QUIT`OPPONENT");
-                        }
-                        else {
-                            sendToPlayerB("QUIT`CONFIRM");
-                            sendToPlayerA("QUIT`OPPONENT");
+                        if (isRandom) {
+                            if (player == 'A') {
+                                sendToPlayerA("QUIT`CONFIRM");
+                                sendToPlayerB("QUIT`OPPONENT");
+                            }
+                            else {
+                                sendToPlayerB("QUIT`CONFIRM");
+                                sendToPlayerA("QUIT`OPPONENT");
+                            }
+                        } else {
+                            if (player == 'A') {
+                                sendToPlayerA("RETURN`CONFIRM");
+                                sendToPlayerB("RETURN`OPPONENT");
+                            }
+                            else {
+                                sendToPlayerB("RETURN`CONFIRM");
+                                sendToPlayerA("RETURN`OPPONENT");
+                            }
                         }
                     }
                     if (Server.battles.contains(matchName))

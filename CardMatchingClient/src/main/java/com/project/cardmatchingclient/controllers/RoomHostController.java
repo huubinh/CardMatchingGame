@@ -62,7 +62,15 @@ public class RoomHostController {
                            });
                            break;
                        case "DELETE":
+                       case "START":
                            break loop;
+                       case "RETURN":
+                           Platform.runLater(() -> {
+                               guestName.setText("You and " + list[1] + " returned to the room");
+                               kickButton.setDisable(false);
+                               startButton.setDisable(false);
+                           });
+                           break;
                    }
 
 
@@ -101,8 +109,9 @@ public class RoomHostController {
 
     @FXML
     private void onStartButtonClicked(ActionEvent event) throws IOException {
+        Connection.send("ROOM`START");
         Stage stage = (Stage) root.getScene().getWindow();
-        ClientApplication.changeScene(stage, "fxml/GameView.fxml");
+        ClientApplication.changeScene(stage, "fxml/BattleView.fxml");
         event.consume();
     }
 }

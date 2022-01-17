@@ -58,14 +58,13 @@ public class ClientHandler implements Runnable {
                         break;
                     case "RAND":
                         if (receivedList[1].equals("MATCH")) {
-                            if (Server.randomUsers.isEmpty()){
+                            if (Server.randomUsers.isEmpty()) {
                                 Server.randomUsers.put(socket, Server.activeUsers.get(socket));
-                            }
-                            else {
+                            } else {
                                 Socket opponentSocket = Server.randomUsers.entrySet().iterator().next().getKey();
                                 Server.randomUsers.remove(opponentSocket);
                                 String newRandomMatch = Server.activeUsers.get(socket) + "-" + Server.activeUsers.get(opponentSocket);
-                                BattleHandler gameHandler = new BattleHandler(socket, opponentSocket, newRandomMatch);
+                                BattleHandler gameHandler = new BattleHandler(socket, opponentSocket, newRandomMatch, true);
                                 Thread newThread = new Thread(gameHandler);
                                 newThread.start();
                             }
@@ -74,11 +73,11 @@ public class ClientHandler implements Runnable {
                             Server.randomUsers.remove(socket);
                         }
                         break;
-                    case "START" :
+                    case "START":
                         String randomMatchName = receivedList[1];
-                        while (Server.battles.contains(randomMatchName));
+                        while (Server.battles.contains(randomMatchName)) ;
                         break;
-                    case "ROOM" :
+                    case "ROOM":
                         switch (receivedList[1]) {
                             case "CREATE" -> {
                                 String roomName = receivedList[2];
@@ -97,26 +96,24 @@ public class ClientHandler implements Runnable {
                                     EmptyRoomHandler emptyRoomHandler = new EmptyRoomHandler(socket, roomName);
                                     Thread thread = new Thread(emptyRoomHandler);
                                     thread.start();
-                                    while(Server.roomHosts.containsKey(socket));
-                                }
-                                else {
-                                    String roomName = findRoom(socket);
-                                    send("ENTER`" + roomName + "`" + findHost(roomName));
-                                    while (Server.roomGuests.get(roomName) != null);
+                                    while (Server.roomHosts.containsKey(socket)) ;
+                                } else {
+                                    String roomName = Server.findRoom(socket);
+                                    send("ENTER`" + roomName + "`" + Server.findHost(roomName));
+                                    while (Server.roomGuests.get(roomName) != null) ;
                                 }
                             }
-                            case "LIST" -> send(loadRoomList());
+                            case "LIST" -> send(Server.loadRoomList());
                             case "JOIN" -> {
-                                if (checkRoom(receivedList[2])) {
+                                if (Server.checkRoom(receivedList[2])) {
                                     Server.roomGuests.put(receivedList[2], socket);
                                     send("JOIN`OK");
-                                }
-                                else
+                                } else
                                     send("JOIN`FAILED");
                             }
                         }
                         break;
-                    case "HISTORY" :
+                    case "HISTORY":
                         send(loadHistory(Server.activeUsers.get(socket)));
                         break;
                     case "EXIT":
@@ -279,46 +276,4 @@ public class ClientHandler implements Runnable {
         return "HISTORY" + "`" + username + "`" + matchCounter + matchDetails;
     }
 
-    public String loadRoomList() {
-        int roomCounter = 0;
-        StringBuilder roomDetails = new StringBuilder();
-        int available = 1;
-        for (Map.Entry room : Server.roomHosts.entrySet()) {
-            roomCounter++;
-            if (Server.roomGuests.get(room.getValue()) != null)
-                available = 0;
-            roomDetails.append("`" + room.getValue() + "`" + Server.activeUsers.get(room.getKey()) + "`" + available);
-        }
-        return "LIST`" + roomCounter + roomDetails;
-    }
-
-    private String findRoom(Socket guest) {
-        for (Map.Entry room : Server.roomGuests.entrySet()) {
-            if (room.getValue().equals(guest))
-                return room.getKey().toString();
-        }
-        return null;
-    }
-
-    private String findHost(String roomName) {
-        Socket host = null;
-        for (Map.Entry room : Server.roomHosts.entrySet()) {
-            if (room.getValue().equals(roomName)) {
-                host = (Socket) room.getKey();
-                break;
-            }
-        }
-        return Server.activeUsers.get(host);
-    }
-
-    private boolean checkRoom(String roomName) {
-        if (Server.roomGuests.containsKey(roomName)) {
-            if (Server.roomGuests.get(roomName) != null)
-                return false;
-            else
-                return true;
-        }
-        else
-            return false;
-    }
 }

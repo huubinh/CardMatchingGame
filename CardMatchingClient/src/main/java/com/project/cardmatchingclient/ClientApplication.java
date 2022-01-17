@@ -27,7 +27,7 @@ public class ClientApplication extends Application {
         Parent root;
         if (Connection.initialize()) {
             root = FXMLLoader.load(ClientApplication.class.getResource("fxml/SignInView.fxml"));
-//            root = FXMLLoader.load(ClientApplication.class.getResource("fxml/GameView.fxml"));
+//            root = FXMLLoader.load(ClientApplication.class.getResource("fxml/BattleView.fxml"));
 
         } else {
             root = FXMLLoader.load(ClientApplication.class.getResource("fxml/ServerErrorView.fxml"));

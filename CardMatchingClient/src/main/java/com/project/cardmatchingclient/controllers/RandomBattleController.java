@@ -27,7 +27,7 @@ public class RandomBattleController {
                         Platform.runLater( () -> {
                                 try {
                                     Stage stage = (Stage) root.getScene().getWindow();
-                                    ClientApplication.changeScene(stage, "fxml/GameView.fxml");
+                                    ClientApplication.changeScene(stage, "fxml/BattleView.fxml");
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }

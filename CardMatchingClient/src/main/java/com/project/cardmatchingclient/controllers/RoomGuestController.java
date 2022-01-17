@@ -33,6 +33,10 @@ public class RoomGuestController {
             roomName.setText(receivedList[1]);
             notification.setText("Waiting for " + receivedList[2] + " to start...");
             isInRoom = true;
+        } else {
+            roomName.setText(receivedList[1]);
+            notification.setText("You and " + receivedList[2] + " returned... Waiting for " + receivedList[2] + " to start...");
+            isInRoom = true;
         }
 
         Thread thread = new Thread(() -> {
@@ -56,7 +60,16 @@ public class RoomGuestController {
                         case "QUIT":
                             break loop;
                         case "START":
-
+                            Connection.send("ENTER`" + list[1]);
+                            Platform.runLater(()-> {
+                                try {
+                                    Stage stage = (Stage) root.getScene().getWindow();
+                                    ClientApplication.changeScene(stage, "fxml/BattleView.fxml");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                            break loop;
                     }
                 }
             } catch (IOException e) {

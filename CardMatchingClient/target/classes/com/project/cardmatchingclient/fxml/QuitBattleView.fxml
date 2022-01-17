@@ -10,7 +10,7 @@
    <center>
       <AnchorPane prefHeight="117.0" prefWidth="320.0" styleClass="background-pane" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="68.0" layoutY="41.0" text="Opponent quit the match" />
+            <Label layoutX="68.0" layoutY="41.0" text="Opponent quit the battle" />
             <Button layoutX="140.0" layoutY="73.0" mnemonicParsing="false" onAction="#onOkButtonClicked" styleClass="my-button" text="OK" />
             <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#onExitButtonClicked">
                <styleClass>

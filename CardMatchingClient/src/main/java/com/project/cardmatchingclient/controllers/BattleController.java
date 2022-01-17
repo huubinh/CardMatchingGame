@@ -7,6 +7,7 @@ import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -95,11 +96,15 @@ public class BattleController {
     private TextField chatInput;
 
     @FXML
+    private Button quitBattleButton;
+
+    @FXML
     private BorderPane root;
 
     private static final int NUM_OF_CARDS = 18;
     private String myName = null;
     private String opponentName = null;
+    private String role = null;
     private int turn;
     private int clickCounter = 0;
     private int firstCardId;
@@ -129,6 +134,11 @@ public class BattleController {
                                 text2.setText(">> " + opponentName + " has joined <<\n");
                                 messageBox.getChildren().add(text2);
                             });
+                            role = list[4];
+                            if (role.equals("RAND"))
+                                quitBattleButton.setText("Quit battle");
+                            else
+                                quitBattleButton.setText("Return room");
                             turn = Integer.parseInt(list[3]);
                             if (turn == 1)
                                 Platform.runLater(() -> {
@@ -172,7 +182,7 @@ public class BattleController {
                                     Platform.runLater(() -> {
                                         Text text = new Text();
                                         text.setStyle("-fx-fill: #0062ff;");
-                                        text.setText(">> " +opponentName + "'s turn <<\n");
+                                        text.setText(">> " + opponentName + "'s turn <<\n");
                                         messageBox.getChildren().add(text);
                                         flipImage(firstCardId, 0);
                                         flipImage(cardId, 0);
@@ -222,7 +232,26 @@ public class BattleController {
                                 Platform.runLater(() -> {
                                     try {
                                         Stage stage = (Stage) root.getScene().getWindow();
-                                        ClientApplication.changeScene(stage,"fxml/QuitBattleView.fxml");
+                                        ClientApplication.changeScene(stage, "fxml/QuitBattleView.fxml");
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+                            }
+                            break loop;
+                        case "RETURN":
+                            if (list[1].equals("OPPONENT")) {
+                                Connection.send("QUIT`CONFIRM");
+                                Platform.runLater(() -> {
+                                    try {
+                                        if (role.equals("HOST")) {
+                                            Stage stage = (Stage) root.getScene().getWindow();
+                                            ClientApplication.changeScene(stage, "fxml/RoomHostView.fxml");
+                                        }
+                                        else {
+                                            Stage stage = (Stage) root.getScene().getWindow();
+                                            ClientApplication.changeScene(stage, "fxml/RoomGuestView.fxml");
+                                        }
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -276,7 +305,7 @@ public class BattleController {
 
     @FXML
     private void onExitButtonClicked(ActionEvent event) throws IOException{
-        Connection.send("QUIT`MATCH");
+        Connection.send("QUIT`BATTLE");
         Connection.send("EXIT");
         Platform.exit();
         event.consume();
@@ -392,8 +421,18 @@ public class BattleController {
     @FXML
     private void onQuitBattleButtonClicked(ActionEvent event) throws IOException {
         Connection.send("QUIT`BATTLE");
-        Stage stage = (Stage) root.getScene().getWindow();
-        ClientApplication.changeScene(stage, "fxml/MenuView.fxml");
+        if (role.equals("RAND")) {
+            Stage stage = (Stage) root.getScene().getWindow();
+            ClientApplication.changeScene(stage, "fxml/MenuView.fxml");
+        }
+        else if (role.equals("HOST")) {
+            Stage stage = (Stage) root.getScene().getWindow();
+            ClientApplication.changeScene(stage, "fxml/RoomHostView.fxml");
+        }
+        else {
+            Stage stage = (Stage) root.getScene().getWindow();
+            ClientApplication.changeScene(stage, "fxml/RoomGuestView.fxml");
+        }
         event.consume();
     }
 
