@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class GameHandler implements Runnable{
+public class BattleHandler implements Runnable{
 
     private Socket playerASocket;
     private DataInputStream playerAIs = null;
@@ -16,6 +16,7 @@ public class GameHandler implements Runnable{
     private DataOutputStream playerBOs = null;
     private String playerBReceivedLine = null;
     private String matchName;
+    private boolean isRandom;
 
     private static final int NUM_OF_CARDS = 18;
     private static final int NUM_OF_IMAGES = 100;
@@ -29,11 +30,10 @@ public class GameHandler implements Runnable{
     private int playerBScore = 0;
     private Random random = new Random();
 
-    public GameHandler(Socket playerASocket, Socket playerBSocket, String newMatch) {
+    public BattleHandler(Socket playerASocket, Socket playerBSocket, String newMatch) {
 
         Server.battles.add(newMatch);
         matchName = newMatch;
-
         this.playerASocket = playerASocket;
         this.playerBSocket = playerBSocket;
 
@@ -43,16 +43,26 @@ public class GameHandler implements Runnable{
 
             playerBIs = new DataInputStream(new BufferedInputStream(playerBSocket.getInputStream()));
             playerBOs = new DataOutputStream(new BufferedOutputStream(playerBSocket.getOutputStream()));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sendToPlayerA("RAND`OK`" + newMatch);
-        sendToPlayerB("RAND`OK`" + newMatch);
+
+
     }
 
     @Override
     public void run() {
-            for (int i = 0; i < NUM_OF_CARDS/2; i++) {
+
+        sendToPlayerA("RAND`OK`" + matchName);
+        sendToPlayerB("RAND`OK`" + matchName);
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+        for (int i = 0; i < NUM_OF_CARDS/2; i++) {
                 int imageId;
                 do
                     imageId = random.nextInt(NUM_OF_IMAGES) + 1;
@@ -75,7 +85,8 @@ public class GameHandler implements Runnable{
             sendToPlayerA("START`" + Server.activeUsers.get(playerASocket) + "`" + Server.activeUsers.get(playerBSocket) + "`" + turn);
             sendToPlayerB("START`" + Server.activeUsers.get(playerBSocket) + "`" + Server.activeUsers.get(playerASocket) + "`" + (turn == 1 ? 2 : 1));
 
-            Thread playerAThread = new Thread(() -> {
+
+        Thread playerAThread = new Thread(() -> {
                     handleGame('A');
             });
             Thread playerBThread = new Thread(() -> {
@@ -200,8 +211,8 @@ public class GameHandler implements Runnable{
                     break;
             }
         }
-        if (Server.battles.contains(matchName))
-            Server.battles.remove(matchName);
+//        if (Server.battles.contains(matchName))
+//            Server.battles.remove(matchName);
         try {
             if (player == 'A')
                 updateHistory(Server.activeUsers.get(playerASocket), Server.activeUsers.get(playerBSocket), playerAScore, playerBScore);

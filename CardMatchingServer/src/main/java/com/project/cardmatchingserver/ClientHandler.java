@@ -65,7 +65,7 @@ public class ClientHandler implements Runnable {
                                 Socket opponentSocket = Server.randomUsers.entrySet().iterator().next().getKey();
                                 Server.randomUsers.remove(opponentSocket);
                                 String newRandomMatch = Server.activeUsers.get(socket) + "-" + Server.activeUsers.get(opponentSocket);
-                                GameHandler gameHandler = new GameHandler(socket, opponentSocket, newRandomMatch);
+                                BattleHandler gameHandler = new BattleHandler(socket, opponentSocket, newRandomMatch);
                                 Thread newThread = new Thread(gameHandler);
                                 newThread.start();
                             }
@@ -94,23 +94,10 @@ public class ClientHandler implements Runnable {
                                 if (Server.roomHosts.containsKey(socket)) {
                                     String roomName = Server.roomHosts.get(socket);
                                     send("ENTER`" + roomName);
-                                    Thread thread = new Thread(() -> {
-                                        String[] list = receive();
-                                        if (list[0].equals("ROOM") && list[1].equals("DELETE")) {
-                                            Server.roomGuests.remove(Server.roomHosts.get(socket));
-                                            Server.roomHosts.remove(socket);
-                                            send("DELETE`CONFIRM");
-                                        }
-                                    });
+                                    EmptyRoomHandler emptyRoomHandler = new EmptyRoomHandler(socket, roomName);
+                                    Thread thread = new Thread(emptyRoomHandler);
                                     thread.start();
-                                    while (Server.roomGuests.containsKey(roomName) && Server.roomGuests.get(roomName) == null);
-                                    if (Server.roomGuests.get(roomName) != null) {
-                                        send("JOIN`" + Server.activeUsers.get(Server.roomGuests.get(roomName)));
-                                        RoomHandler roomHandler = new RoomHandler(socket, Server.roomGuests.get(roomName));
-                                        Thread newThread = new Thread(roomHandler);
-                                        newThread.start();
-                                        while (Server.roomGuests.get(roomName) != null);
-                                    }
+                                    while(Server.roomHosts.containsKey(socket));
                                 }
                                 else {
                                     String roomName = findRoom(socket);

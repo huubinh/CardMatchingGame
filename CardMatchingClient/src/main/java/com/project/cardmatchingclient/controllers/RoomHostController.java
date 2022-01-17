@@ -39,20 +39,38 @@ public class RoomHostController {
         startButton.setDisable(true);
 
         Thread thread = new Thread(() -> {
-            try {
-                String receivedLine = Connection.receive();
-                String[] list = receivedLine.split("`");
-                if (list[0].equals("JOIN")) {
-                    Platform.runLater(() -> {
-                        guestName.setText(list[1] + " has joined the room");
-                        kickButton.setDisable(false);
-                        startButton.setDisable(false);
-                    });
-                    Connection.send("JOINED");
+            loop:
+            while(true) {
+                try {
+                    String receivedLine = Connection.receive();
+                    String[] list = receivedLine.split("`");
+                   switch (list[0]) {
+                       case "JOIN":
+                           Platform.runLater(() -> {
+                               guestName.setText(list[1] + " has joined the room");
+                               kickButton.setDisable(false);
+                               startButton.setDisable(false);
+                           });
+                           Connection.send("JOINED");
+                           break;
+                       case "QUIT":
+                           Connection.send("ROOM`QUIT`CONFIRM");
+                           Platform.runLater(() -> {
+                               guestName.setText("Guest left... Waiting for another guest...");
+                               kickButton.setDisable(true);
+                               startButton.setDisable(true);
+                           });
+                           break;
+                       case "DELETE":
+                           break loop;
+                   }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+
         });
         thread.start();
     }
@@ -73,8 +91,11 @@ public class RoomHostController {
     }
 
     @FXML
-    private void onKickButtonClicked(ActionEvent event) {
-
+    private void onKickButtonClicked(ActionEvent event) throws IOException {
+        Connection.send("ROOM`KICK");
+        guestName.setText("Guest was kicked... Waiting for another guest...");
+        kickButton.setDisable(true);
+        startButton.setDisable(true);
         event.consume();
     }
 

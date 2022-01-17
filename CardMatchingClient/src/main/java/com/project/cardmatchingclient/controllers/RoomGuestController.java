@@ -23,6 +23,8 @@ public class RoomGuestController {
     @FXML
     private BorderPane root;
 
+    private boolean isInRoom;
+
     @FXML
     public void initialize() throws IOException {
         Connection.send("ROOM`ENTER");
@@ -30,6 +32,7 @@ public class RoomGuestController {
         if (receivedList[0].equals("ENTER")) {
             roomName.setText(receivedList[1]);
             notification.setText("Waiting for " + receivedList[2] + " to start...");
+            isInRoom = true;
         }
 
         Thread thread = new Thread(() -> {
@@ -39,8 +42,21 @@ public class RoomGuestController {
                     String[] list = Connection.receive().split("`");
                     switch (list[0]) {
                         case "DELETE":
+                            Platform.runLater(()->{
+                                notification.setText(receivedList[2] + " deleted the room");
+                            });
+                            isInRoom = false;
+                            break loop;
                         case "KICK":
+                            Platform.runLater(()-> {
+                                notification.setText("Oops! " + receivedList[2] + " kicked you!");
+                            });
+                            isInRoom = false;
+                            break loop;
+                        case "QUIT":
+                            break loop;
                         case "START":
+
                     }
                 }
             } catch (IOException e) {
@@ -48,13 +64,14 @@ public class RoomGuestController {
             }
 
         });
-//        thread.start();
+        thread.start();
 
     }
 
     @FXML
     private void onExitButtonClicked(ActionEvent event) throws IOException{
-        Connection.send("ROOM`QUIT");
+        if (isInRoom) Connection.send("ROOM`QUIT");
+        else Connection.send("QUIT");
         Connection.send("EXIT");
         Platform.exit();
         event.consume();
@@ -62,7 +79,8 @@ public class RoomGuestController {
 
     @FXML
     private void onQuitButtonClicked(ActionEvent event) throws IOException {
-        Connection.send("ROOM`QUIT");
+        if (isInRoom) Connection.send("ROOM`QUIT");
+        else Connection.send("QUIT");
         Stage stage = (Stage) root.getScene().getWindow();
         ClientApplication.changeScene(stage, "fxml/MenuView.fxml");
         event.consume();

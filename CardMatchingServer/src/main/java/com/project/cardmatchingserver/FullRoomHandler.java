@@ -3,7 +3,7 @@ package com.project.cardmatchingserver;
 import java.io.*;
 import java.net.Socket;
 
-public class RoomHandler implements Runnable {
+public class FullRoomHandler implements Runnable {
 
     private Socket hostSocket;
     private DataInputStream hostIs = null;
@@ -14,7 +14,7 @@ public class RoomHandler implements Runnable {
     private DataOutputStream guestOs = null;
     private String guestReceivedLine = null;
 
-    public RoomHandler(Socket hostSocket, Socket guestSocket) {
+    public FullRoomHandler(Socket hostSocket, Socket guestSocket) {
         this.hostSocket = hostSocket;
         this.guestSocket = guestSocket;
 
@@ -42,17 +42,17 @@ public class RoomHandler implements Runnable {
                             Server.roomGuests.remove(Server.roomHosts.get(hostSocket));
                             Server.roomHosts.remove(hostSocket);
                             sendToGuest("DELETE");
+                            sendToHost("DELETE`CONFIRM");
                             break loop;
                         case "KICK":
                             Server.roomGuests.put(Server.roomHosts.get(hostSocket), null);
                             sendToGuest("KICK");
                             break loop;
                         case "QUIT":
-                            Server.roomGuests.put(Server.roomHosts.get(hostSocket), null);
                             break loop;
                         case "START":
                             String battle = Server.activeUsers.get(hostSocket) + "-" + Server.activeUsers.get(guestSocket);
-                            GameHandler gameHandler = new GameHandler(hostSocket, guestSocket, battle);
+                            BattleHandler gameHandler = new BattleHandler(hostSocket, guestSocket, battle);
                             Thread thread = new Thread(gameHandler);
                             thread.start();
                             while (Server.battles.contains(battle));
@@ -62,9 +62,19 @@ public class RoomHandler implements Runnable {
             }
         });
         Thread guestThread = new Thread(() -> {
-            String[] receivedList = receiveFromGuest();
-            if (receivedList[0].equals("ROOM") && receivedList[1].equals("QUIT"))
-                sendToHost("QUIT");
+            loop:
+            while (true) {
+                String[] receivedList = receiveFromGuest();
+                if (receivedList[0].equals("ROOM") && receivedList[1].equals("QUIT")) {
+                    Server.roomGuests.put(Server.roomHosts.get(hostSocket), null);
+                    sendToGuest("QUIT`CONFIRM");
+                    sendToHost("QUIT");
+                    break loop;
+                }
+                else if (receivedList[0].equals("QUIT"))
+                    break loop;
+            }
+
         });
         hostThread.start();
         guestThread.start();

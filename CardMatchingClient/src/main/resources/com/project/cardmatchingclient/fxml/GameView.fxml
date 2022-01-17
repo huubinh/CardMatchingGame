@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane fx:id="root" prefHeight="650.0" prefWidth="1035.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.GameController">
+<BorderPane fx:id="root" prefHeight="650.0" prefWidth="1035.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.BattleController">
    <center>
       <AnchorPane prefHeight="547.0" prefWidth="990.0" styleClass="background-pane" BorderPane.alignment="CENTER">
          <children>

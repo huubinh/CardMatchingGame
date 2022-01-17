@@ -1,6 +1,7 @@
 package com.project.cardmatchingserver;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class Server {
 
-    public static final int SERVER_PORT = 8000;
+    public static final int SERVER_PORT = 8080;
     public static HashMap<Socket, String> activeUsers = new HashMap<>();
     public static HashMap<Socket, String> randomUsers = new HashMap<>();
     public static List<String> battles = new ArrayList<String>();
@@ -21,7 +22,8 @@ public class Server {
         ServerSocket serverSocket = null;
 
         System.out.println("Binding to port " + SERVER_PORT + ", please wait...");
-        serverSocket = new ServerSocket(SERVER_PORT);
+        serverSocket = new ServerSocket();
+        serverSocket.bind(new InetSocketAddress("0.0.0.0", SERVER_PORT));
         System.out.println("Server started");
         System.out.println("Waiting for clients...");
 
