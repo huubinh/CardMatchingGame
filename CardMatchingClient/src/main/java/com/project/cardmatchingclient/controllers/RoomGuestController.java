@@ -35,7 +35,7 @@ public class RoomGuestController {
             isInRoom = true;
         } else {
             roomName.setText(receivedList[1]);
-            notification.setText("You and " + receivedList[2] + " returned... Waiting for " + receivedList[2] + " to start...");
+            notification.setText("You and " + receivedList[2] + " returned... waiting for " + receivedList[2] + " to start...");
             isInRoom = true;
         }
 

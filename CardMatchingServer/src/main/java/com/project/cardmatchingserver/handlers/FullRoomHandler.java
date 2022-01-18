@@ -1,4 +1,7 @@
-package com.project.cardmatchingserver;
+package com.project.cardmatchingserver.handlers;
+
+import com.project.cardmatchingserver.Server;
+import com.project.cardmatchingserver.handlers.BattleHandler;
 
 import java.io.*;
 import java.net.Socket;

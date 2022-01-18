@@ -39,7 +39,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" prefHeight="228.0" prefWidth="395.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.RoomGuestController">
+<BorderPane fx:id="root" prefHeight="228.0" prefWidth="465.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.RoomGuestController">
    <top>
       <AnchorPane prefHeight="31.0" prefWidth="474.0" BorderPane.alignment="CENTER">
          <children>
@@ -52,15 +52,15 @@
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="169.0" prefWidth="474.0" styleClass="background-pane" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="169.0" prefWidth="440.0" styleClass="background-pane" BorderPane.alignment="CENTER">
       <children>
-            <Label fx:id="notification" alignment="CENTER" layoutX="45.0" layoutY="55.0" prefHeight="20.0" prefWidth="289.0" style="&#10;" styleClass="notification" textAlignment="CENTER" textFill="WHITE" wrapText="false" />
+            <Label fx:id="notification" alignment="CENTER" layoutX="39.0" layoutY="55.0" prefHeight="20.0" prefWidth="368.0" style="&#10;" styleClass="notification" textAlignment="CENTER" textFill="WHITE" wrapText="false" />
             <Button fx:id="exitButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" onAction="#onExitButtonClicked">
                <styleClass>
                   <String fx:value="exit-button" />
                   <String fx:value="my-button" />
                </styleClass></Button>
-            <Button fx:id="quitButton" layoutX="142.0" layoutY="106.0" mnemonicParsing="false" onAction="#onQuitButtonClicked" styleClass="my-button" text="Quit room" />
+            <Button fx:id="quitButton" layoutX="177.0" layoutY="107.0" mnemonicParsing="false" onAction="#onQuitButtonClicked" styleClass="my-button" text="Quit room" />
       </children>
       </AnchorPane>
    </bottom>

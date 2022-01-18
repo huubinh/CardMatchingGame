@@ -1,9 +1,10 @@
-package com.project.cardmatchingserver;
+package com.project.cardmatchingserver.handlers;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
 
+import com.project.cardmatchingserver.Server;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class ClientHandler implements Runnable {

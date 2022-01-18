@@ -46,7 +46,7 @@
    <center>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="161.0" prefWidth="453.0" styleClass="background-pane">
       <children>
-            <Button fx:id="exitButton" layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExitButtonClicked">
+            <Button fx:id="exitButton" layoutX="12.0" layoutY="12.0" mnemonicParsing="false" onAction="#onExitButtonClicked">
                <styleClass>
                   <String fx:value="my-button" />
                   <String fx:value="exit-button" />
