@@ -1,13 +1,14 @@
 package com.project.cardmatchingclient.network;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Connection {
 
-    public final static String SERVER_IP = "127.0.0.1";
-    public final static int SERVER_PORT = 8080;
-//    public final static String SERVER_IP = "192.168.5.108";
+    public final static String SERVER_ADDRESS = "0.tcp.ngrok.io";
+    public final static int SERVER_PORT = 14057;
 
     private static Socket socket = null;
     private static DataInputStream is = null;
@@ -16,7 +17,7 @@ public class Connection {
     public static boolean initialize() {
 
         try {
-            socket = new Socket(SERVER_IP, SERVER_PORT); // Connect to server
+            socket = new Socket(SERVER_ADDRESS, SERVER_PORT); // Connect to server
             System.out.println("Connected: " + socket);
 
             is = new DataInputStream(socket.getInputStream());

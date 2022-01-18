@@ -25,8 +25,7 @@ public class Server {
         ServerSocket serverSocket;
 
         System.out.println("Binding to port " + SERVER_PORT + ", please wait...");
-        serverSocket = new ServerSocket();
-        serverSocket.bind(new InetSocketAddress("0.0.0.0", SERVER_PORT));
+        serverSocket = new ServerSocket(SERVER_PORT);
         System.out.println("Server started");
         System.out.println("Waiting for clients...");
 
