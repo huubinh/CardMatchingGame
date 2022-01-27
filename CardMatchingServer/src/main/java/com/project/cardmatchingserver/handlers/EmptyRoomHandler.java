@@ -28,13 +28,6 @@ public class EmptyRoomHandler implements Runnable {
     @Override
     public void run() {
 
-//        while (Server.roomGuests.get(roomName) == null);
-//        if (Server.roomGuests.get(roomName) != null) {
-//
-//            while (Server.roomGuests.get(roomName) != null);
-//            thread.start();
-//            while (Server.roomGuests.containsKey(roomName) && Server.roomGuests.get(roomName) == null);
-//        }
 
         loop:
         while (Server.roomHosts.containsKey(hostSocket)) {

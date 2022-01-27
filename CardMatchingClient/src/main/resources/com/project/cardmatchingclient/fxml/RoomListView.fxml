@@ -37,11 +37,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="661.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.RoomListController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="763.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.RoomListController">
    <center>
       <AnchorPane prefHeight="344.0" prefWidth="439.0" styleClass="background-pane" BorderPane.alignment="CENTER">
          <children>
@@ -50,28 +52,60 @@
                   <String fx:value="exit-button" />
                   <String fx:value="my-button" />
                </styleClass></Button>
-            <TableView fx:id="roomList" layoutX="51.0" layoutY="59.0" prefHeight="221.0" prefWidth="534.0">
+            <TableView fx:id="roomList" layoutX="41.0" layoutY="62.0" prefHeight="221.0" prefWidth="534.0">
               <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="177.0" text="  Room" />
-                <TableColumn fx:id="hostColumn" minWidth="6.0" prefWidth="178.0" text="  Host" />
+                <TableColumn fx:id="nameColumn" prefWidth="167.0" text="  Room" />
+                <TableColumn fx:id="hostColumn" minWidth="6.0" prefWidth="188.0" text="  Host" />
                   <TableColumn fx:id="stateColumn" minWidth="6.0" prefWidth="178.0" text="State" />
               </columns>
             </TableView>
-            <Button fx:id="cancelButton" layoutX="230.0" layoutY="301.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" styleClass="my-button" text="Cancel" />
-            <Button fx:id="updateButton" layoutX="352.0" layoutY="301.0" mnemonicParsing="false" onAction="#onUpdateButtonClicked" styleClass="my-button" text="Update" />
-            <Label fx:id="notification" layoutX="51.0" layoutY="19.0" prefHeight="16.0" prefWidth="534.0" styleClass="notification" />
+            <Button fx:id="cancelButton" layoutX="215.0" layoutY="299.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" styleClass="my-button" text="Cancel" />
+            <Button fx:id="updateButton" layoutX="337.0" layoutY="299.0" mnemonicParsing="false" onAction="#onUpdateButtonClicked" styleClass="my-button" text="Update" />
+            <Label fx:id="notification" layoutX="51.0" layoutY="17.0" prefHeight="16.0" prefWidth="534.0" styleClass="notification" />
          </children>
       </AnchorPane>
    </center>
    <top>
-      <AnchorPane prefHeight="48.0" prefWidth="436.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="69.0" prefWidth="745.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="267.0" layoutY="12.0" styleClass="text-label" text="Room List">
+            <Label layoutX="296.0" layoutY="18.0" styleClass="text-label" text="Room List">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <ImageView fitHeight="69.0" fitWidth="83.0" layoutX="177.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="49.0" layoutX="462.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet2.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </top>
+   <left>
+      <AnchorPane prefHeight="364.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="56.0" fitWidth="57.0" layoutX="19.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet3.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="364.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="94.0" fitWidth="74.0" layoutX="80.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet4.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </right>
 </BorderPane>

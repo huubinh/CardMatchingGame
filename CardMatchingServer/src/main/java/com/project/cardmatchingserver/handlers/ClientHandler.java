@@ -85,8 +85,8 @@ public class ClientHandler implements Runnable {
                                 if (Server.roomHosts.containsValue(roomName))
                                     send("CREATE`FAILED");
                                 else {
-                                    Server.roomHosts.put(socket, receivedList[2]);
-                                    Server.roomGuests.put(receivedList[2], null);
+                                    Server.roomHosts.put(socket, roomName);
+                                    Server.roomGuests.put(roomName, null);
                                     send("CREATE`OK");
                                 }
                             }

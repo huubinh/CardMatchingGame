@@ -7,8 +7,11 @@ import java.net.UnknownHostException;
 
 public class Connection {
 
-    public final static String SERVER_ADDRESS = "0.tcp.ngrok.io";
-    public final static int SERVER_PORT = 14057;
+//    public final static String SERVER_ADDRESS = "4.tcp.ngrok.io";
+//    public final static int SERVER_PORT = 11230;
+
+    public final static String SERVER_IP = "192.168.0.103";
+    public final static int SERVER_PORT = 8080;
 
     private static Socket socket = null;
     private static DataInputStream is = null;
@@ -17,7 +20,7 @@ public class Connection {
     public static boolean initialize() {
 
         try {
-            socket = new Socket(SERVER_ADDRESS, SERVER_PORT); // Connect to server
+            socket = new Socket(SERVER_IP, SERVER_PORT); // Connect to server
             System.out.println("Connected: " + socket);
 
             is = new DataInputStream(socket.getInputStream());

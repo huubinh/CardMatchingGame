@@ -46,7 +46,7 @@ public class HistoryController {
         opponentNameColumn.setCellValueFactory(new PropertyValueFactory<>("opponentName"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        history.setPlaceholder(new Label("No matches to show"));
+        history.setPlaceholder(new Label("No battles to show"));
 
         Connection.send("HISTORY");
         String[] receivedList = Connection.receive().split("`");

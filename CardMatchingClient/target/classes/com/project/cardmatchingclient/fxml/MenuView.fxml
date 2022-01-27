@@ -35,6 +35,8 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -42,7 +44,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" prefHeight="280.0" prefWidth="527.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.MenuController">
+<BorderPane fx:id="root" prefHeight="364.0" prefWidth="557.0" styleClass="shadow-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cardmatchingclient.controllers.MenuController">
    <center>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="161.0" prefWidth="453.0" styleClass="background-pane">
       <children>
@@ -81,17 +83,32 @@
                   <Button fx:id="signOutButton" mnemonicParsing="false" onAction="#onSignOutButtonClicked" prefHeight="30.0" prefWidth="277.0" styleClass="my-button" text="Sign out" GridPane.rowIndex="2" />
                </children>
             </GridPane>
+            <ImageView fitHeight="72.0" fitWidth="51.0" layoutX="-34.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet3.png" />
+               </image>
+            </ImageView>
       </children>
       </AnchorPane>
    </center>
    <top>
-      <AnchorPane prefHeight="85.0" prefWidth="507.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="127.0" prefWidth="537.0" BorderPane.alignment="CENTER">
          <children>
-        <Label alignment="BOTTOM_CENTER" layoutX="205.0" layoutY="50.0" prefHeight="27.0" prefWidth="110.0" style="&#10;" styleClass="text-label" text="Menu" textAlignment="CENTER" textFill="WHITE" wrapText="false">
+        <Label alignment="BOTTOM_CENTER" layoutX="205.0" layoutY="78.0" prefHeight="27.0" prefWidth="110.0" style="&#10;" styleClass="text-label" text="Menu" textAlignment="CENTER" textFill="WHITE" wrapText="false">
           <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
           </font>
         </Label>
+            <ImageView fitHeight="54.0" fitWidth="50.0" layoutX="332.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="73.0" fitWidth="86.0" layoutX="120.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet1.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </top>
@@ -99,7 +116,14 @@
       <AnchorPane prefHeight="281.0" prefWidth="30.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <AnchorPane prefHeight="281.0" prefWidth="24.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="281.0" prefWidth="24.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="107.0" fitWidth="70.0" layoutX="-25.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/planet4.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
    </right>
    <bottom>
       <AnchorPane prefHeight="39.0" prefWidth="853.0" BorderPane.alignment="CENTER" />
