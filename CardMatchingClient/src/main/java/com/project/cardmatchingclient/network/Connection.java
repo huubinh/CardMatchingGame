@@ -10,7 +10,7 @@ public class Connection {
 //    public final static String SERVER_ADDRESS = "4.tcp.ngrok.io";
 //    public final static int SERVER_PORT = 11230;
 
-    public final static String SERVER_IP = "192.168.0.103";
+    public final static String SERVER_IP = "25.26.26.45";
     public final static int SERVER_PORT = 8080;
 
     private static Socket socket = null;

@@ -31,15 +31,6 @@
    -fx-background-color: transparent;
 }
 
-.bg-pane{
-   -fx-background-image: url("../img/b2.jpg");
-   -fx-background-repeat: no-repeat;
-   -fx-background-size: cover;
-   -fx-background-position: center center;
-   -fx-padding: 10px 15px;
-   -fx-background-radius: 10px;
-}
-
 .highlight-rectangle{
    -fx-background-color: derive(-primary, 50%);
    -fx-background-radius: 5px;
@@ -85,20 +76,6 @@
 .button-transparent {
     -fx-background-color: transparent;
     -fx-text-fill: transparent;
-}
-
-.error-label{
-    -fx-text-fill: #375FCB ;
-    -fx-font-weight: bold;
-    -fx-font-size: 14;
-    -fx-background-color: linear-gradient(to right, #0f0c2977, #302b6377, #24243e77);
-    -fx-background-radius: 10px;
-    -fx-padding: 10px;
-    -fx-alignment: center;
-
-    -width: 350;
-    -fx-min-width: -width;
-    -fx-max-width: -width;
 }
 
 .message-box{
