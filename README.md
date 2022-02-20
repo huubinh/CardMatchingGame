@@ -1,6 +1,6 @@
 # Card Matching Game
-A 1v1 card matching game project with client and server <br/>
-Screenshots : <br/>
+A 1v1 card matching game project with client and server <br/><br/>
+Screenshots : <br/><br/>
 ![image](https://user-images.githubusercontent.com/61822203/154847276-05581ba1-4a42-446c-a3e2-f13df4d02b7a.png) <br/>
 ![image](https://user-images.githubusercontent.com/61822203/154847290-eef7fe29-405c-4a76-9f2e-d437089b9565.png) <br/>
 ![image](https://user-images.githubusercontent.com/61822203/154847308-f80b22ff-e26c-4089-b6d6-0ac803ffbe1a.png) <br/>
