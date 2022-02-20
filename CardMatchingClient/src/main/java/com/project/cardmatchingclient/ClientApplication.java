@@ -27,8 +27,6 @@ public class ClientApplication extends Application {
         Parent root;
         if (Connection.initialize()) {
             root = FXMLLoader.load(ClientApplication.class.getResource("fxml/SignInView.fxml"));
-//            root = FXMLLoader.load(ClientApplication.class.getResource("fxml/BattleView.fxml"));
-
         } else {
             root = FXMLLoader.load(ClientApplication.class.getResource("fxml/ServerErrorView.fxml"));
         }
@@ -50,8 +48,6 @@ public class ClientApplication extends Application {
             stage.setY(event.getScreenY() - yOffset);
             event.consume();
         });
-//        scene.getRoot().setEffect(new DropShadow(10, Color.rgb(100, 100, 100)));
-//        scene.getRoot().setEffect(new DropShadow(8, Color.rgb(10, 169, 194)));
         scene.getRoot().setEffect(new DropShadow(6, Color.rgb(233, 171, 255)));
 
         scene.setFill(Color.TRANSPARENT);
@@ -65,20 +61,6 @@ public class ClientApplication extends Application {
         stage.show();
     }
 
-//    public static void newWindow(Stage currentStage, String afterClosedFxml, String newFxml) throws IOException {
-//        Parent root = FXMLLoader.load(ClientApplication.class.getResource(newFxml));
-//        Stage newStage = new Stage();
-//        Scene newScene = createScene(newStage, root);
-//        newStage.setScene(newScene);
-//        newStage.initStyle(StageStyle.TRANSPARENT);
-//        newStage.show();
-//        newStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//            @Override
-//            public void handle(WindowEvent e) {
-//                Platform.exit();
-//            }
-//        });
-//    }
 
     public static void main(String[] args) {
         launch();
